@@ -19,8 +19,8 @@ class GrGsm < Formula
     mkdir "build" do
       ENV.append "LDFLAGS", "-Wl,-undefined,dynamic_lookup"
       # Point Python library to existing path or CMake test will fail.
-      gnuradio_opt_prefix = Formula["gr-osmosdr"].opt_prefix
-      ENV.prepend_create_path "GRC_BLOCKS_PATH", "#{gnuradio_opt_prefix}/share/gnuradio/grc/blocks"
+      osmosdr_opt_prefix = Formula["gr-osmosdr"].opt_prefix
+      ENV["GRC_BLOCKS_PATH"] = "#{osmosdr_opt_prefix}/share/gnuradio/grc/blocks"
 
       args = %W[
         -DCMAKE_BUILD_WITH_INSTALL_RPATH=NO
