@@ -18,7 +18,6 @@ class GrGsm < Formula
       # Point Python library to existing path or CMake test will fail.
       args = %W[
         -DCMAKE_BUILD_WITH_INSTALL_RPATH=NO
-        -DCMAKE_SKIP_INSTALL_RPATH:YES
         -DCMAKE_SKIP_RPATH=YES
         -DCMAKE_SHARED_LINKER_FLAGS='-Wl,-undefined,dynamic_lookup'
         -DPYTHON_LIBRARY='#{HOMEBREW_PREFIX}/lib/libgnuradio-runtime.dylib'
