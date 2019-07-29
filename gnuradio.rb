@@ -91,14 +91,11 @@ class Gnuradio < Formula
 
     resource("cppzmq").stage include.to_s
     
-    python_prefix = `python2-config --prefix`.strip
-    
     args = std_cmake_args + %W[
       -DGR_PKG_CONF_DIR=#{etc}/gnuradio/conf.d
       -DGR_PREFSDIR=#{etc}/gnuradio/conf.d
       -DENABLE_DEFAULT=OFF
-      -DPYTHON_LIBRARY='#{python_prefix}/Python'
-      -DPYTHON_INCLUDE_DIR='#{python_prefix}/Headers'
+      -DCMAKE_SHARED_LINKER_FLAGS='-Wl,-undefined,dynamic_lookup'
     ]
 
     enabled = %w[GR_ANALOG GR_FFT VOLK GR_FILTER GNURADIO_RUNTIME
