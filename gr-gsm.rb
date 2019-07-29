@@ -53,7 +53,7 @@ index 27a3df7..5126d77 100644
  
  ########################################################################
 diff --git a/cmake/Modules/GrccCompile.cmake b/cmake/Modules/GrccCompile.cmake
-index 4a917c5..cdd23ac 100644
+index 4a917c5..2f519c0 100644
 --- a/cmake/Modules/GrccCompile.cmake
 +++ b/cmake/Modules/GrccCompile.cmake
 @@ -42,7 +42,7 @@ macro(GRCC_COMPILE file_name)
@@ -61,7 +61,7 @@ index 4a917c5..cdd23ac 100644
              OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${file_name}
              COMMAND "${CMAKE_COMMAND}"
 -                -E env PYTHONPATH="${PYTHONPATH}" GRC_BLOCKS_PATH=${CMAKE_SOURCE_DIR}/grc
-+                -E env PYTHONPATH="${PYTHONPATH}" GRC_BLOCKS_PATH=${CMAKE_SOURCE_DIR}/grc:${GRC_BLOCKS_PATH}
++                -E env PYTHONPATH="${PYTHONPATH}" GRC_BLOCKS_PATH=${CMAKE_SOURCE_DIR}/grc:$ENV{GRC_BLOCKS_PATH}
                  ${PC_GNURADIO_RUNTIME_PREFIX}/${GR_RUNTIME_DIR}/grcc -d ${CMAKE_CURRENT_BINARY_DIR}
                  ${CMAKE_CURRENT_SOURCE_DIR}/${file_name}.grc
              COMMAND "${CMAKE_COMMAND}" -E rename ${CMAKE_CURRENT_BINARY_DIR}/${file_name}.py ${CMAKE_CURRENT_BINARY_DIR}/${file_name}
