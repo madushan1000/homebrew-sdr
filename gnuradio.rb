@@ -196,17 +196,21 @@ end
 
 __END__
 diff --git a/gr-qtgui/lib/CMakeLists.txt b/gr-qtgui/lib/CMakeLists.txt
-index 553f27c..e7ec364 100644
+index 553f27c..3a86a4c 100644
 --- a/gr-qtgui/lib/CMakeLists.txt
 +++ b/gr-qtgui/lib/CMakeLists.txt
-@@ -166,9 +166,11 @@ endif(WIN32)
+@@ -166,9 +166,15 @@ endif(WIN32)
  include(GrPython)
  if(ENABLE_PYTHON)
    add_definitions(-DENABLE_PYTHON)
 -  list(APPEND qtgui_libs
 -    ${PYTHON_LIBRARIES}
 -  )
-+  if(NOT APPLE)
++  if(APPLE)
++    list(APPEND qtgui_libs
++      "-undefined dynamic_lookup"
++    )
++  else()
 +    list(APPEND qtgui_libs
 +      ${PYTHON_LIBRARIES}
 +    )
@@ -214,4 +218,3 @@ index 553f27c..e7ec364 100644
  endif(ENABLE_PYTHON)
  
  add_definitions(-DQWT_DLL) #setup QWT library linkage
-
