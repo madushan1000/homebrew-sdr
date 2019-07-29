@@ -19,7 +19,7 @@ class Gnuradio < Formula
   depends_on "python@2"
   depends_on "uhd"
   depends_on "zeromq"
-  depends_on "cartr/homebrew-qt4/pygtk"
+  depends_on "pygtk"
   depends_on "cartr/homebrew-qt4/qt@4"
   depends_on "cartr/homebrew-qt4/qwt-qt4"
   depends_on "cartr/homebrew-qt4/pyqt@4"
