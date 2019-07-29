@@ -10,7 +10,7 @@ class GrGsm < Formula
   depends_on "boost"
   depends_on "librtlsdr"
   depends_on "gr-osmosdr"
-  depends_on "madushan1000/sdr/gnuradio"
+  depends_on "gnuradio"
   depends_on "madushan1000/sdr/libosmocore"
 
   patch :DATA
