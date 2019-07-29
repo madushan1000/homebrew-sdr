@@ -8,10 +8,10 @@ class GrGsm < Formula
   depends_on "swig" => :build
   depends_on "cppunit" => :build
   depends_on "boost"
-  depends_on "madushan1000/sdr/gnuradio"
-  depends_on "libosmocore"
   depends_on "librtlsdr"
   depends_on "gr-osmosdr"
+  depends_on "madushan1000/sdr/gnuradio"
+  depends_on "madushan1000/sdr/libosmocore"
 
   patch :DATA
 
