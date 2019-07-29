@@ -67,6 +67,8 @@ class Gnuradio < Formula
     sha256 "9836235ea69b3d66b5cd4b2cdc89f80d010797d2bd59dc5c6631a96af921db8c"
   end
 
+  patch :DATA
+
   def install
     ENV["CHEETAH_INSTALL_WITHOUT_SETUPTOOLS"] = "1"
     ENV["XML_CATALOG_FILES"] = etc/"xml/catalog"
@@ -95,7 +97,6 @@ class Gnuradio < Formula
       -DGR_PKG_CONF_DIR=#{etc}/gnuradio/conf.d
       -DGR_PREFSDIR=#{etc}/gnuradio/conf.d
       -DENABLE_DEFAULT=OFF
-      -DCMAKE_SHARED_LINKER_FLAGS='-Wl,-undefined,dynamic_lookup'
     ]
 
     enabled = %w[GR_ANALOG GR_FFT VOLK GR_FILTER GNURADIO_RUNTIME
@@ -192,3 +193,25 @@ class Gnuradio < Formula
     end
   end
 end
+
+__END__
+diff --git a/gr-qtgui/lib/CMakeLists.txt b/gr-qtgui/lib/CMakeLists.txt
+index 553f27c..e7ec364 100644
+--- a/gr-qtgui/lib/CMakeLists.txt
++++ b/gr-qtgui/lib/CMakeLists.txt
+@@ -166,9 +166,11 @@ endif(WIN32)
+ include(GrPython)
+ if(ENABLE_PYTHON)
+   add_definitions(-DENABLE_PYTHON)
+-  list(APPEND qtgui_libs
+-    ${PYTHON_LIBRARIES}
+-  )
++  if(NOT APPLE)
++    list(APPEND qtgui_libs
++      ${PYTHON_LIBRARIES}
++    )
++  endif(APPLE)
+ endif(ENABLE_PYTHON)
+ 
+ add_definitions(-DQWT_DLL) #setup QWT library linkage
+
