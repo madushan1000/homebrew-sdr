@@ -10,6 +10,7 @@ class GrGsm < Formula
   depends_on "boost"
   depends_on "gnuradio"
   depends_on "libosmocore"
+  depends_on "librtlsdr"
 
   def install
     mkdir "build" do
