@@ -12,6 +12,8 @@ class GrGsm < Formula
   depends_on "libosmocore"
   depends_on "librtlsdr"
 
+  patch :DATA
+  
   def install
     mkdir "build" do
       ENV.append "LDFLAGS", "-Wl,-undefined,dynamic_lookup"
@@ -30,3 +32,19 @@ class GrGsm < Formula
     end
   end
 end
+
+__END__
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 27a3df7..5126d77 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -230,9 +230,6 @@ if(APPLE)
+     if(NOT CMAKE_INSTALL_RPATH)
+         set(cmakE_INSTALL_RPATH  ${CMAKE_INSTALL_PREFIX}/${GR_LIBRARY_DIR} CACHE PATH "Library Install RPath" FORCE)
+     endif(NOT CMAKE_INSTALL_RPATH)
+-    if(NOT CMAKE_BUILD_WITH_INSTALL_RPATH)
+-        set(CMAKE_BUILD_WITH_INSTALL_RPATH ON CACHE  BOOL "Do Build Using Library Install RPath" FORCE)
+-    endif(NOT CMAKE_BUILD_WITH_INSTALL_RPATH)
+ endif(APPLE)
+ 
+ ########################################################################
