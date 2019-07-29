@@ -19,6 +19,8 @@ class GrGsm < Formula
     mkdir "build" do
       ENV.append "LDFLAGS", "-Wl,-undefined,dynamic_lookup"
       # Point Python library to existing path or CMake test will fail.
+      ENV.prepend_create_path "GRC_BLOCKS_PATH", Formula["gr-osmosdr"].opt_prefix"/share/gnuradio/grc/blocks"
+
       args = %W[
         -DCMAKE_BUILD_WITH_INSTALL_RPATH=NO
         -DCMAKE_SKIP_BUILD_RPATH=NO
@@ -49,3 +51,16 @@ index 27a3df7..5126d77 100644
  endif(APPLE)
  
  ########################################################################
+diff --git a/cmake/Modules/GrccCompile.cmake b/cmake/Modules/GrccCompile.cmake
+index 4a917c5..cdd23ac 100644
+--- a/cmake/Modules/GrccCompile.cmake
++++ b/cmake/Modules/GrccCompile.cmake
+@@ -42,7 +42,7 @@ macro(GRCC_COMPILE file_name)
+         ADD_CUSTOM_COMMAND(
+             OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${file_name}
+             COMMAND "${CMAKE_COMMAND}"
+-                -E env PYTHONPATH="${PYTHONPATH}" GRC_BLOCKS_PATH=${CMAKE_SOURCE_DIR}/grc
++                -E env PYTHONPATH="${PYTHONPATH}" GRC_BLOCKS_PATH=${CMAKE_SOURCE_DIR}/grc:${GRC_BLOCKS_PATH}
+                 ${PC_GNURADIO_RUNTIME_PREFIX}/${GR_RUNTIME_DIR}/grcc -d ${CMAKE_CURRENT_BINARY_DIR}
+                 ${CMAKE_CURRENT_SOURCE_DIR}/${file_name}.grc
+             COMMAND "${CMAKE_COMMAND}" -E rename ${CMAKE_CURRENT_BINARY_DIR}/${file_name}.py ${CMAKE_CURRENT_BINARY_DIR}/${file_name}
