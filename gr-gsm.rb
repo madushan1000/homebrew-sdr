@@ -11,9 +11,10 @@ class GrGsm < Formula
   depends_on "gnuradio"
   depends_on "libosmocore"
   depends_on "librtlsdr"
+  depends_on "madushan1000/sdr/gr-osmosdr"
 
   patch :DATA
-  
+
   def install
     mkdir "build" do
       ENV.append "LDFLAGS", "-Wl,-undefined,dynamic_lookup"
