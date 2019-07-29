@@ -6,6 +6,7 @@ class GrGsm < Formula
   depends_on "doxygen" => :build
   depends_on "graphviz" => :build
   depends_on "swig" => :build
+  depends_on "cppunit" => :build
   depends_on "boost"
   depends_on "gnuradio"
   depends_on "libosmocore"
